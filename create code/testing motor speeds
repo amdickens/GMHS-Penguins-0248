@@ -1,0 +1,10 @@
+int lmotor = 200
+int rmotor = 200
+int main()
+{
+create_connect();
+create_drive_direct (lmotor, rmotor);
+msleep(6000);
+create_disconnect();
+return(0);
+}
