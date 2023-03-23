@@ -1,1 +1,27 @@
-testtt
+//0-15 seconds
+//rightmotor speed variable (rmotor)
+//leftmotor speed variable (lmotor)
+//alarmdistance
+//start code
+//create connection
+//move forward until black line (use inferred sensor)
+//turn right 90 degrees
+//move forward along black line, scooping up poms
+//stop before the wireshark (certain distance)
+//turn right 135 degrees
+//move forward a little (10 cm maybe)
+//move backwards (10 cm^^)
+//turn left 135 degrees
+//15-30 seconds
+//close scoop
+//raise scoop (high enough to reach below alarm switch)
+//move to alarm (use variable “alarmdistance”)
+//raise scoop to switch the alarm
+//move backwards (“alarmdistance”)
+//turn right 45 degrees
+//lower scoop (able to pick up cube)
+//open scoop (enough to pick up cube)
+//move to red cube
+//30-45 seconds
+//close scoop
+//
