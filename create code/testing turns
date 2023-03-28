@@ -1,8 +1,18 @@
-void turn_right (int degrees)
+void rturn (int degrees); //turn right function
+int lmotor = ; //get value from testing
+int rmotor = ; //get value from testing
 int main()
 {
 create_connect();
-create_drive_direct (
+rturn (90); //call function
+create_stop();
 create_disconnect();
 return(0);
+}
+
+void rturn (int degrees) //what function does when called
+{
+create_drive_direct (lmotor, -rmotor);
+msleep(degrees*20);                     //example value
+create_stop();
 }
