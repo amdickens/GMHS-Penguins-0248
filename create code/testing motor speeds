@@ -1,4 +1,4 @@
-int lmotor = 200
+int lmotor = 208
 int rmotor = 200
 int main()
 {
