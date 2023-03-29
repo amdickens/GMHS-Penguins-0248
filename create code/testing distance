@@ -1,10 +1,10 @@
 void fdrive (int distance); //drive forward function
-int lmotor = ; //get value from testing
-int rmotor = ; //get value from testing
+int lmotor = 208; //get value from testing
+int rmotor = 200; //get value from testing
 int main()
 {
 create_connect();
-fdrive (30); //call function (drive forward 30 cm)
+fdrive (61); //call function (drive forward 30 cm)
 create_stop();
 create_disconnect();
 return(0);
@@ -13,6 +13,6 @@ return(0);
 void fdrive (int distance) //function definition (distance in cm)
 {
 create_drive_direct(lmotor, rmotor);
-msleep(distance/25*1000);             //example value
+msleep(distance/19*1000);             //example value
 create_stop();
 }
