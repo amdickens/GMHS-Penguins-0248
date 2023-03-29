@@ -1,0 +1,62 @@
+int rmotor = 200;              //right motor speed value that makes robot go straight
+int lmotor = 208;              //left motor speed value that makes robot go straight
+int open = 568;                //open scoop servo value, large enough to scoop all poms and grab firewall
+int close = 1394;              //close scoop servo value, small enough to secure firewall
+int up = 1230;                 //raised scoop value, high enough to reach alarm switch
+int down = 716;                //lowered scoop value, almost touching ground
+int armstart = 1000;           //starting servo position for arm
+int poms = 10;                 //drop off pom distance in cm
+int arm = 2;                   //arm servo port
+int claw = 3;                  //claw servo port
+int lift = 800;                //lift cube off ground value for servo
+int firewall = 20;             //distance to grab firewall
+void rturn (int degrees);      //turn right for inputted number of degrees
+void lturn (int degrees);      //turn left for inputted number of degrees
+void fdrive (int distance);    //drive forward for an inputted distance in cm
+void bdrive (int distance);    //drive backward for an inputted distance in cm
+
+int main()
+{
+create_connect();
+enable_servos ();
+set_servo_position (claw, open);      //open scoop
+set_servo_position (arm, down);       //lower scoop
+fdrive (firewall);                    //drive towards cube
+set_servo_position (claw, close);     //close scoop to grab firewall
+set_servo_position (arm, lift);       //lift the firewall off the ground
+bdrive (firewall);                    //drive backwards to the line
+rturn (135); 
+
+disable_servos ();
+create_stop();
+create_disconnect();
+return(0);
+}
+
+void rturn (int degrees)
+{
+create_drive_direct (lmotor, -rmotor);
+msleep(degrees*10.5);                     
+create_stop();
+}
+
+void lturn (int degrees)
+{
+create_drive_direct (-lmotor, rmotor);
+msleep(degrees*10.5);                   
+create_stop();
+}
+
+void fdrive (int distance)
+{
+create_drive_direct(lmotor, rmotor);
+msleep(distance/19*1000);           
+create_stop();
+}
+
+void bdrive (int distance)
+{
+create_drive_direct(-lmotor, -rmotor);
+msleep(distance/19*1000);           
+create_stop();
+}
