@@ -1,7 +1,7 @@
 int rmotor = 200;              //right motor speed value that makes robot go straight
 int lmotor = 208;              //left motor speed value that makes robot go straight
 int open = 568;                //open scoop servo value, large enough to scoop all poms and grab firewall
-int close = 1394;              //close scoop servo value, small enough to secure firewall
+int close = 1144;              //close scoop servo value, small enough to secure firewall
 int up = 1230;                 //raised scoop value, high enough to reach alarm switch
 int down = 716;                //lowered scoop value, almost touching ground
 int armstart = 1000;           //starting servo position for arm
