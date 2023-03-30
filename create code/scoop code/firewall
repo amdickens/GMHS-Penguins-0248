@@ -1,8 +1,8 @@
 int rmotor = 200;              //right motor speed value that makes robot go straight
 int lmotor = 208;              //left motor speed value that makes robot go straight
 int open = 568;                //open scoop servo value, large enough to scoop all poms and grab firewall
-int close = 1394;              //close scoop servo value, hits alarm
-int fclose = 900;              //closed scoop servo value, grabs firewall
+int close = 1144;              //close scoop servo value, hits alarm
+int secure = 900;              //closed scoop servo value, grabs firewall
 int up = 1230;                 //raised scoop value, high enough to reach alarm switch
 int down = 716;                //lowered scoop value, almost touching ground
 int armstart = 1000;           //starting servo position for arm
@@ -23,7 +23,8 @@ enable_servos ();
 set_servo_position (claw, open);      //open scoop
 set_servo_position (arm, down);       //lower scoop
 fdrive (firewall);                    //drive towards cube
-set_servo_position (claw, fclose);    //close scoop to grab firewall
+msleep(100);
+set_servo_position (claw, secure);    //close scoop to grab firewall
 set_servo_position (arm, lift);       //lift the firewall off the ground
 bdrive (firewall);                    //drive backwards to the line
 rturn (135);                          //turns right 135 degrees to face external network connection
