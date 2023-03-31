@@ -1,1 +1,39 @@
-//slay
+#include <kipr/wombat.h>
+//turn left
+//move out of starting box
+//turn right
+//move forward
+//square against tower (using bumpers)
+//grab botgal with claw
+
+//The msleep from bottom of the pully to the top of the pully is 22037 milliseconds 
+
+int frontbumper1 = 0;
+int frontbumper2 = 1;
+int backbumper1 = 7;
+int backbumper2 = 8;
+int main()
+{
+    mav(0,800);
+    mav(1,-800);
+    msleep(1396);//turn left
+    
+    mav(0,800);
+    mav(1,800);
+    msleep(1000);//move out of starting box
+    
+    mav(0,-800);
+    mav(1,800);
+    msleep(1396);//turn right
+    
+	while((digital(frontbumper1)==0)||(digital(frontbumper2)==0))
+	{
+		mav(0,800);
+    	mav(1,800);
+    	msleep(200);
+	}
+    mav(0,-1000);
+    mav(1,-1000);
+    msleep(1000);
+    return(0);
+}
