@@ -1,16 +1,18 @@
+#include <kipr/wombat.h>
+
 int rmotor = 200;              //right motor speed value that makes robot go straight
 int lmotor = 208;              //left motor speed value that makes robot go straight
 int open = 568;                //open scoop servo value, large enough to scoop all poms and grab firewall
-int close = 1144;              //close scoop servo value, hits alarm
-int secure = 900;              //closed scoop servo value, grabs firewall
-int up = 1230;                 //raised scoop value, high enough to reach alarm switch
-int down = 716;                //lowered scoop value, almost touching ground
-int armstart = 1000;           //starting servo position for arm
+int close = 1350;              //close scoop servo value, hits alarm
+int secure = 1100;              //closed scoop servo value, grabs firewall
+int up = 1630;                 //raised scoop value, high enough to reach alarm switch
+int down = 670;                //lowered scoop value, almost touching ground
+int armstart = 1150;           //starting servo position for arm
 int poms = 25;                 //drop off pom distance in cm
-int arm = 2;                   //arm servo port
-int claw = 3;                  //claw servo port
+int arm = 1;                   //arm servo port
+int claw = 0;                  //claw servo port
 int lift = 800;                //lift cube off ground value for servo
-int firewall = 20;             //distance to grab firewall
+int firewall = 37.9;             //distance to grab firewall
 void rturn (int degrees);      //turn right for inputted number of degrees
 void lturn (int degrees);      //turn left for inputted number of degrees
 void fdrive (int distance);    //drive forward for an inputted distance in cm
@@ -23,13 +25,16 @@ enable_servos ();
 set_servo_position (claw, open);      //open scoop
 set_servo_position (arm, down);       //lower scoop
 fdrive (firewall);                    //drive towards cube
-msleep(100);
+msleep(500);
 set_servo_position (claw, secure);    //close scoop to grab firewall
-set_servo_position (arm, lift);       //lift the firewall off the ground
+msleep(500);
 bdrive (firewall);                    //drive backwards to the line
-rturn (135);                          //turns right 135 degrees to face external network connection
+set_servo_position (arm, up);       //lift the firewall off the ground
+rturn (130);                          //turns right 135 degrees to face external network connection
+fdrive (150);                          //drives to external network connection
 set_servo_position (arm, down);       //puts arm down
-fdrive (90);                          //drves to external network connection
+    msleep(500);
+fdrive (20);                          //drives to external network connection
 set_servo_position (claw, open);      //lets go of cube under connection
 bdrive (20);                          //drives backward
 disable_servos ();
