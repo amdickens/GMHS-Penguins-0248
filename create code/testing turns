@@ -13,6 +13,6 @@ return(0);
 void rturn (int degrees) //what function does when called
 {
 create_drive_direct (lmotor, -rmotor);
-msleep(degrees*10.5);                     //example value
+msleep(degrees*10.43);                     //example value
 create_stop();
 }
