@@ -12,7 +12,7 @@ int poms = 25;                 //drop off pom distance in cm
 int arm = 1;                   //arm servo port
 int claw = 0;                  //claw servo port
 int lift = 800;                //lift cube off ground value for servo
-int firewall = 37.9;             //distance to grab firewall
+int firewall = 37.9;           //distance to grab firewall
 void rturn (int degrees);      //turn right for inputted number of degrees
 void lturn (int degrees);      //turn left for inputted number of degrees
 void fdrive (int distance);    //drive forward for an inputted distance in cm
@@ -29,13 +29,13 @@ msleep(500);
 set_servo_position (claw, secure);    //close scoop to grab firewall
 msleep(500);
 bdrive (firewall);                    //drive backwards to the line
-set_servo_position (arm, up);       //lift the firewall off the ground
+set_servo_position (arm, up);         //lift the firewall off the ground
 rturn (130);                          //turns right 135 degrees to face external network connection
-fdrive (150);                          //drives to external network connection
+fdrive (150);                         //drives towards external network connection
 set_servo_position (arm, down);       //puts arm down
-    msleep(500);
+msleep(500);
 fdrive (20);                          //drives to external network connection
-set_servo_position (claw, open);      //lets go of cube under connection
+set_servo_position (claw, open);      //releases cube under connection
 bdrive (20);                          //drives backward
 disable_servos ();
 create_stop();
@@ -46,14 +46,14 @@ return(0);
 void rturn (int degrees)
 {
 create_drive_direct (lmotor, -rmotor);
-msleep(degrees*10.5);                     
+msleep(degrees*10.43);                     
 create_stop();
 }
 
 void lturn (int degrees)
 {
 create_drive_direct (-lmotor, rmotor);
-msleep(degrees*10.5);                   
+msleep(degrees*10.43);                   
 create_stop();
 }
 
