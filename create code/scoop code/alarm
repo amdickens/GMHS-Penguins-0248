@@ -6,7 +6,7 @@ int up = 1230;                 //raised scoop value, high enough to reach alarm 
 int down = 716;                //lowered scoop value, almost touching ground
 int armstart = 1000;           //starting servo position for arm
 int poms = 25;                 //drop off pom distance in cm
-int arm = 2;                   //arm servo port
+int arm = 1;                   //arm servo port
 int claw = 3;                  //claw servo port
 void rturn (int degrees);      //turn right for inputted number of degrees
 void lturn (int degrees);      //turn left for inputted number of degrees
@@ -34,14 +34,14 @@ return(0);
 void rturn (int degrees)
 {
 create_drive_direct (lmotor, -rmotor);
-msleep(degrees*10.5);                     
+msleep(degrees*10.43);                     
 create_stop();
 }
 
 void lturn (int degrees)
 {
 create_drive_direct (-lmotor, rmotor);
-msleep(degrees*10.5);                   
+msleep(degrees*10.43);                   
 create_stop();
 }
 
