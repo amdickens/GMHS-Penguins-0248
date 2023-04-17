@@ -20,6 +20,7 @@ enable_servos ();
 set_servo_position (claw, close);       //close scoop
 set_servo_position (arm, armstart);     //lower/raise scoop
 msleep(500); 
+fdrive (20);
 set_servo_position (arm, up);          //raise scoop to flip alarm
 bdrive (20);
 rturn (45);
