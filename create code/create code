@@ -1,67 +1,80 @@
-//0-15 seconds
-int rmotor = //rightmotor speed variable (rmotor)
-int lmotor = //leftmotor speed variable (lmotor)
-int firewall = //firewalldistance variable (firewall)
-void drive (int distance); //distance variable to use w encoders (distance)
-void turn_right (int degrees); //turn right function
-//alarmdistance (alarm)
+#include <kipr/wombat.h>
+int rmotor = 200;              //right motor speed value that makes robot go straight
+int lmotor = 208;              //left motor speed value that makes robot go straight
+int open = 568;                //open scoop servo value, large enough to grab firewall
+int close = 1510;              //close scoop servo value, small enough to secure firewall
+int up = 1700;                 //raised scoop value, high enough to reach alarm switch
+int down = 1020;                //lowered scoop value, almost touching ground
+int armstart = 1250;           //starting servo position for arm
+int poms = 20;                 //drop off pom distance in cm
+int line = 37;                 //distance to back up to line
+int arm = 2;                   //arm servo port
+int claw = 0;                  //claw servo port
+int scoop = 3;                 //pom scoop servo port
+int rise = 1600;               //up value for pom scoop
+int low = 285;                 //down value for pom scoop to pick up poms
+void rturn (int degrees);      //turn right for inputted number of degrees
+void lturn (int degrees);      //turn left for inputted number of degrees
+void fdrive (int distance);    //drive forward for an inputted distance in cm
+void bdrive (int distance);    //drive backward for an inputted distance in cm
 
-int main () //start code
-{ //whole code bracket
-create_connect(); //create connection
-wait_for_light(); //put in port number
-//when the light gets turned on, the create starts
-shut_down_in(120); //game time
-while (get_create_lfcliff_amt()>1000) // create sees white
+int main()
 {
-create_drive_direct (lmotor, rmotor);
-msleep(10);
+    
+   // shut_down_in(15);
+create_connect();
+enable_servos ();
+set_servo_position (scoop, low);        //lowers scoop
+msleep(900);
+fdrive(180);                            //change number, robot moves to last set of files
+rturn(100);                             //turn right 135 degrees
+msleep(700);                            //pause for half a second
+set_servo_position (scoop, rise);       //raises scoop out of the way
+lturn(10);                              //turn left 45 degrees, should be perpendicular with line
+bdrive(line);                           //backs up to black line
+lturn(90);                              //turn left 90 degrees, , should be parallel with line
+bdrive(20);
+    //SLAYYYYY
+set_servo_position (claw, close);       //close scoop
+set_servo_position (arm, armstart);     //lower/raise scoop
+msleep(1000); 
+fdrive(35);
+set_servo_position (arm, up);          //raise scoop to flip alarm
+msleep(1000);
+bdrive (20);
+rturn (45);
+set_servo_position (claw, open);       //open scoop
+set_servo_position (arm, down);        //lower arm
+disable_servos ();
+create_stop();
+create_disconnect();
+return(0);
 }
-while (get_create_lfcliff_amt()<1000) // create sees black
+
+void rturn (int degrees)
 {
-create_drive_direct (0, 0);
-msleep(100);
-}
-//move forward until black line (use cliff sensor)
-//turn right 90 degrees
-//move forward along black line, scooping up poms
-//stop before the wireshark (certain distance)
-//turn right 135 degrees
-//move forward a little (10 cm maybe)
-//move backwards (10 cm^^)
-//turn left 135 degrees
-
-//15-30 seconds
-//close scoop
-//raise scoop (high enough to reach below alarm switch)
-//move to alarm (use variable “alarmdistance”)
-//raise scoop to switch the alarm
-//move backwards (“alarmdistance”)
-//turn right 45 degrees
-//lower scoop (able to pick up cube)
-//open scoop (enough to pick up cube)
-//move to red cube (firewalldistance)
-
-//30-45 seconds
-//close scoop
-//move backwards (firewalldistance)
-//turn right 135 degrees
-//drive to external network connection (while following black line)
-//open scoop
-
-//45-60 seconds
-//
-
-//FUNCTIONS
-void drive (int distance) //function for drive for an inputted number of cm
-{
-create_drive_direct (lmotor, rmotor);
-msleep (distance);
+create_drive_direct (lmotor, -rmotor);
+msleep(degrees*10.43);                     
 create_stop();
 }
-void turn_right (int degrees) //function for turning right at and inputted angle in degrees
+
+void lturn (int degrees)
 {
-create_drive_direct (lmotor/2, rmotor/2);
-msleep(degrees);
+create_drive_direct (-lmotor, rmotor);
+msleep(degrees*10.43);                   
+create_stop();
+}
+
+void fdrive (int distance)
+{
+create_drive_direct(lmotor, rmotor);
+msleep(distance/19*1000);           
+create_stop();
+}
+
+void bdrive (int distance)
+{
+create_drive_direct(-lmotor, -rmotor);
+msleep(distance/19*1000);           
 create_stop();
 }
