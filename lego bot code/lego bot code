@@ -1,39 +1,65 @@
 #include <kipr/wombat.h>
-//turn left
-//move out of starting box
-//turn right
-//move forward
-//square against tower (using bumpers)
-//grab botgal with claw
-
-//The msleep from bottom of the pully to the top of the pully is 22037 milliseconds 
-
-int frontbumper1 = 0;
-int frontbumper2 = 1;
-int backbumper1 = 7;
-int backbumper2 = 8;
+int bump1 = 0;
+int bump2 = 1;
+int rspeed = 970;
+int lspeed = 1000;
+int open = 1450;
+int close = 535;
+int loweringspeed = -120;
+int oneeightyturn = 2210;
 int main()
 {
-    mav(0,800);
-    mav(1,-800);
-    msleep(1396);//turn left
+    shut_down_in(120);
+    mav(0,-1*lspeed);
+    mav(1,rspeed);
+    msleep(580);
     
-    mav(0,800);
-    mav(1,800);
-    msleep(1000);//move out of starting box
+    mav(0,lspeed);
+    mav(1,rspeed);
+    msleep(7850);
     
-    mav(0,-800);
-    mav(1,800);
-    msleep(1396);//turn right
-    
-	while((digital(frontbumper1)==0)||(digital(frontbumper2)==0))
+    mav(0,lspeed);
+    mav(1,-1*rspeed);
+    msleep(580);
+    while((digital(bump1)==0)||(digital(bump2)==0))
 	{
-		mav(0,800);
-    	mav(1,800);
-    	msleep(200);
-	}
-    mav(0,-1000);
-    mav(1,-1000);
+		mav(0,lspeed);
+    	mav(1,rspeed);
+    	msleep(10);
+    }
+    mav(0,-1*lspeed);
+    mav(1,-1*rspeed);
+    msleep(300);
+    ao();
+    
+    enable_servos();
+    set_servo_position(0,open);
+    mav(2,loweringspeed);
     msleep(1000);
-    return(0);
-}
+    ao();
+    set_servo_position(0,close);
+    mav(2,1000);
+    msleep(500);
+    mav(0,-1*lspeed);
+    mav(1,-1*rspeed);
+    msleep(2000);
+    mav(0,-1000);
+    mav(1,1000);
+    msleep(oneeightyturn);
+    while((digital(bump1)==0)||(digital(bump2)==0))
+	{
+		mav(0,lspeed);
+    	mav(1,rspeed);
+    	msleep(10);
+    }
+    mav(0,-1*lspeed);
+    mav(1,-1*rspeed);
+    msleep(2000);
+    set_servo_position(0,open); //first cube in cybersecurity lab
+    mav(0,-1000);
+    mav(1,1000);
+    msleep(turntime
+   
+    
+    return 0;
+    }
