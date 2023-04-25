@@ -96,7 +96,7 @@ int main()
     
     cmpc(0);
     msleep(10);
-    cmpc(1;
+    cmpc(1);
     msleep(10);
    
     while((digital(bump1)==0)||(digital(bump2)==0)) //bump next to rightmost tower
