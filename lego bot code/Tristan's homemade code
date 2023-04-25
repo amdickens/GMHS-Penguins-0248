@@ -4,16 +4,16 @@ int bump2 = 1;
 int rspeed = 970;
 int lspeed = 1000;
 int open = 1450;
-int close = 535;
+int close = 625;
 int pulleyspeed = 1000;
-int oneeightyturn = 2210;
-int ninetyturn = 1105;
+int oneeightyturn = 2200;
+int ninetyturn = 1100;
 int main()
 {
     shut_down_in(120);
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(2500);
+    msleep(5000);
     
     mav(0,lspeed);
     mav(1,-1*rspeed);
@@ -21,7 +21,7 @@ int main()
     
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(8000);
+    msleep(8200);
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
@@ -29,32 +29,33 @@ int main()
     
       while((digital(bump1)==0)||(digital(bump2)==0))
       {
-	mav(0,lspeed);
+		mav(0,lspeed);
     	mav(1,rspeed);
     	msleep(10);
       }
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(300);
+    msleep(100);
     off(0);
     off(1); //at tower, both motors off
     
     enable_servo(0);
     set_servo_position(0,open);
     mav(2,-1*pulleyspeed);
-    msleep(1300);
+    msleep(1800);
     off(2);
     set_servo_position(0,close);
+    msleep(200);
     disable_servo(0);
     
     mav(2,pulleyspeed);
-    msleep(1300);
+    msleep(1800);
     off(2);
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(2500);
+    msleep(1500);
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
@@ -69,11 +70,16 @@ int main()
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(2000);
+    msleep(2800);
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
     msleep(ninetyturn);
+    
+    mav(0,lspeed);
+    mav(1,rspeed);
+    msleep(1500);
+    
     off(0);
     off(1);
     
@@ -81,8 +87,14 @@ int main()
     msleep(3000);
     off(2); //lower claw to drop cube
     
+    
+    
     enable_servo(0);
     set_servo_position(0,open); //first cube in cybersecurity lab
+    msleep(300);
+    mav(0,-1*lspeed);
+    mav(1,-1*rspeed);
+    msleep(600);
     mav(0,-1*lspeed);
     mav(1,rspeed);
     msleep(oneeightyturn);
@@ -91,7 +103,7 @@ int main()
     disable_servo(0);
     
     mav(2,pulleyspeed);
-    msleep(3000);
+    msleep(2000);
     off(2);
     
     cmpc(0);
@@ -108,20 +120,21 @@ int main()
       
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(300);
+    msleep(100);
     off(0);
     off(1); //at tower, both motors off
     
     enable_servo(0);
     set_servo_position(0,open);
     mav(2,-1*pulleyspeed);
-    msleep(1300);
+    msleep(1700);
     off(2);
     set_servo_position(0,close);
+    msleep(300);
     disable_servo(0);
     
     mav(2,pulleyspeed);
-    msleep(1300);
+    msleep(1700);
     off(2);
     
     gmpc(0);
@@ -129,9 +142,9 @@ int main()
     gmpc(1);
     msleep(10);
     
-    mtp(0,-1*lspeed,0);
-    mtp(1,-1*rspeed,0);
-    msleep(10);
+    mav(0,-1*lspeed);
+    mav(1,-1*rspeed);
+    msleep(3500);
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
@@ -141,9 +154,10 @@ int main()
     
     enable_servo(0);
     mav(2,-1*pulleyspeed);
-    msleep(700);
+    msleep(900);
     off(2);
     set_servo_position(0,open);
+    msleep(300);
     disable_servo(0); //STACK HEIGHT 2!!!!!!
     
     mav(0,-1*lspeed);
