@@ -126,7 +126,7 @@ int main()
     
     gmpc(0);
     msleep(10);
-    gmpc(1;
+    gmpc(1);
     msleep(10);
     
     mtp(0,-1*lspeed,0);
