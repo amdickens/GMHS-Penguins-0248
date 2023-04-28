@@ -2,7 +2,7 @@
 int rmotor = 200;              //right motor speed value that makes robot go straight
 int lmotor = 208;              //left motor speed value that makes robot go straight
 int open = 568;                //open scoop servo value, large enough to grab firewall
-int close = 1510;              //close scoop servo value, small enough to secure firewall
+int close = 1200;              //close scoop servo value, small enough to be able to hit alarm
 int up = 1700;                 //raised scoop value, high enough to reach alarm switch
 int down = 1020;                //lowered scoop value, almost touching ground
 int armstart = 1250;           //starting servo position for arm
@@ -12,7 +12,9 @@ int arm = 2;                   //arm servo port
 int claw = 0;                  //claw servo port
 int scoop = 3;                 //pom scoop servo port
 int rise = 1600;               //up value for pom scoop
+int firewall = 27;             //firewall distance
 int low = 250;                 //down value for pom scoop to pick up poms
+int secure = 1550;             //claw value that secures the firewall
 void rturn (int degrees);      //turn right for inputted number of degrees
 void lturn (int degrees);      //turn left for inputted number of degrees
 void fdrive (int distance);    //drive forward for an inputted distance in cm
@@ -25,54 +27,36 @@ wait_for_light(0);
 shut_down_in(120);
 create_connect();
 enable_servos ();
-set_servo_position (scoop, low);        //lowers scoop
-    set_servo_position (arm, up);     //lowers arm
-    set_servo_position (claw, open);    //opens claw
+set_servo_position (scoop, low);      //lowers scoop
+set_servo_position (arm, up);         //lowers arm
+set_servo_position (claw, open);      //opens claw
 msleep(300);
-/*zoom(30);                               //try no knock down rack-a-stack with momentum
-    msleep(100);
-    set_servo_position (arm, up);       //moves arm out of the way
-  */  fdrive(175);                        //moves to last set of files
-rturn(110);                             //turn right 110 degrees
-msleep(200);                            //pause for half a second
-bdrive(20);
-//set_servo_position (scoop, 790);       //raises scoop a bit
-//rturn(70);                            //turns to knock down rack-a-stack
-  //PUT A DRIVE HEREE
-// lturn(135);                           //turns to face cube
-    //CUBEEEEEE
-/*set_servo_position (claw, open);      //open scoop
+fdrive(180);                          //moves to last set of files
+rturn(120);                           //turn right 120 degrees to drop off files
+msleep(200);
+lturn(20);
+bdrive(30);                           //leaves files in cybersecurity
+set_servo_position(scoop, rise);      //raise pom scoop out of the way
+lturn(60);                            //face cube
+msleep(300);
+set_servo_position (claw, open);      //open scoop
 set_servo_position (arm, down);       //lower scoop
 fdrive (firewall);                    //drive towards cube
 msleep(500);
 set_servo_position (claw, secure);    //close scoop to grab firewall
 msleep(500);
-bdrive (firewall);                    //drive backwards to the line
-set_servo_position (arm, up);       //lift the firewall off the ground
-rturn (130);                          //turns right 135 degrees to face external network connection
-fdrive (150);                          //drives to external network connection
+bdrive (firewall+11);                 //drive backwards to the line
+set_servo_position (arm, up);         //lift the firewall off the ground
+rturn (145);                          //turns right 145 degrees to face external network connection
+fdrive (130);                         //drives to external network connection
 set_servo_position (arm, down);       //puts arm down
-    msleep(500);
-fdrive (20);                          //drives to external network connection
+msleep(500);
+fdrive (30);                          //drives to external network connection
 set_servo_position (claw, open);      //lets go of cube under connection
 bdrive (20);                          //drives backward
-    */
-/*lturn(20);                            //turn left 45 degrees, should be perpendicular with line
-bdrive(line);                           //backs up to black line
-lturn(90);                              //turn left 90 degrees, should be parallel with line
-bdrive(20);
-    //SLAYYYYY
-set_servo_position (claw, close);       //close scoop
-set_servo_position (arm, armstart);     //lower/raise scoop
-msleep(1000); 
-fdrive(37);
-set_servo_position (arm, up);          //raise scoop to flip alarm
-msleep(1000);
-bdrive (20);
-rturn (45);
-set_servo_position (claw, open);       //open scoop
-set_servo_position (arm, down);        //lower arm
-*/
+set_servo_position(arm, up);
+lturn (180);
+fdrive (30);
 disable_servos ();
 create_stop();
 create_disconnect();
@@ -104,12 +88,5 @@ void bdrive (int distance)
 {
 create_drive_direct(-lmotor, -rmotor);
 msleep(distance/19*1000);           
-create_stop();
-}
-
-void zoom (int distance)
-{
-create_drive_direct(500, 500);
-msleep(distance/16*1000);           
 create_stop();
 }
