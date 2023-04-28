@@ -1,19 +1,20 @@
 #include <kipr/wombat.h>
-int bump1 = 0;
-int bump2 = 1;
-int rspeed = 970;
+int bump1 = 0; //left bumper
+int bump2 = 1; //right bumper
+int rspeed = 980; //speed of our
 int lspeed = 1000;
 int open = 1450;
 int close = 625;
 int pulleyspeed = 1000;
 int oneeightyturn = 2200;
-int ninetyturn = 1100;
+int ninetyturn = 1095;
 int main()
 {
+    wait_for_light(0);
     shut_down_in(120);
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(5000);
+    msleep(4500);
     
     mav(0,lspeed);
     mav(1,-1*rspeed);
@@ -36,14 +37,14 @@ int main()
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(100);
+    msleep(170);
     off(0);
     off(1); //at tower, both motors off
     
     enable_servo(0);
     set_servo_position(0,open);
     mav(2,-1*pulleyspeed);
-    msleep(1800);
+    msleep(1800); 
     off(2);
     set_servo_position(0,close);
     msleep(200);
@@ -55,15 +56,15 @@ int main()
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(1500);
+    msleep(1200);
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(ninetyturn);
+    msleep(1025); ////////////
     
       while((digital(bump1)==0)||(digital(bump2)==0)) //bump next to rightmost tower
       {
-	mav(0,lspeed);
+		mav(0,lspeed);
     	mav(1,rspeed);
     	msleep(10);
       }
@@ -94,7 +95,7 @@ int main()
     msleep(300);
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(600);
+    msleep(850);
     mav(0,-1*lspeed);
     mav(1,rspeed);
     msleep(oneeightyturn);
@@ -103,7 +104,7 @@ int main()
     disable_servo(0);
     
     mav(2,pulleyspeed);
-    msleep(2000);
+    msleep(3000);
     off(2);
     
     cmpc(0);
@@ -120,21 +121,21 @@ int main()
       
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(100);
+    msleep(170);
     off(0);
     off(1); //at tower, both motors off
     
     enable_servo(0);
     set_servo_position(0,open);
     mav(2,-1*pulleyspeed);
-    msleep(1700);
+    msleep(1800);
     off(2);
     set_servo_position(0,close);
     msleep(300);
     disable_servo(0);
     
-    mav(2,pulleyspeed);
-    msleep(1700);
+    mav(2,900);
+    msleep(1800);
     off(2);
     
     gmpc(0);
@@ -144,27 +145,54 @@ int main()
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(3500);
+    msleep(3400);
+    
+    mav(0,lspeed);
+    mav(1,rspeed);
+    msleep(150);
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(oneeightyturn);
+    msleep(2023);
     off(0);
     off(1);
     
     enable_servo(0);
     mav(2,-1*pulleyspeed);
-    msleep(900);
-    off(2);
+    msleep(3500);
+	off(2);
     set_servo_position(0,open);
     msleep(300);
     disable_servo(0); //STACK HEIGHT 2!!!!!!
     
-    mav(0,-1*lspeed);
-    mav(1,rspeed);
-    msleep(ninetyturn);
+    mav(2,pulleyspeed);
+    msleep(3000);
+    off(2);
     
-   
+    mav(0,lspeed);
+    mav(1,-1*rspeed);
+    msleep(960);
+    off(0);
+    off(1);
+    
+    mav(2,-1*pulleyspeed);
+    msleep(3000);
+    off(2);
+    
+    enable_servo(0);
+    set_servo_position(0,480);
+    msleep(100);
+    disable_servo(0);
+    
+    mav(0,lspeed);
+    mav(1,rspeed);
+    msleep(1300);
+    off(0);
+    off(1);
+    
+    mav(2,pulleyspeed);
+    msleep(3000);
+    off(2);
     
     return 0;
     }
