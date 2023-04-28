@@ -19,7 +19,6 @@ void rturn (int degrees);      //turn right for inputted number of degrees
 void lturn (int degrees);      //turn left for inputted number of degrees
 void fdrive (int distance);    //drive forward for an inputted distance in cm
 void bdrive (int distance);    //drive backward for an inputted distance in cm
-void zoom (int distance);      //drive forward at highest speed for inputted distance in cm
 
 int main()
 {
@@ -44,7 +43,7 @@ set_servo_position (arm, down);       //lower scoop
 fdrive (firewall);                    //drive towards cube
 msleep(500);
 set_servo_position (claw, secure);    //close scoop to grab firewall
-msleep(500);
+msleep(1000);
 bdrive (firewall+11);                 //drive backwards to the line
 set_servo_position (arm, up);         //lift the firewall off the ground
 rturn (145);                          //turns right 145 degrees to face external network connection
