@@ -22,20 +22,20 @@ int main()
 {
 create_connect();
 enable_servos ();
-//set_servo_position (claw, close);       //close claw
-//set_servo_position (arm, armstart);     //lower/raise claw
-//fdrive(20);                           //change this number!, gets robot out of starting box
+set_servo_position (claw, close);       //close claw
+set_servo_position (arm, armstart);     //lower/raise claw
+fdrive(20);                             //gets robot out of starting box
 rturn(90);                              //turn right 90 degrees
     msleep(400);
 set_servo_position (scoop, low);        //lowers scoop
     msleep(600);
-fdrive(170);                            //change number, robot moves to last set of files
+fdrive(170);                            //robot moves to last set of files
 rturn(100);                             //turn right 135 degrees
 msleep(500);                            //pause for half a second
 set_servo_position (scoop, rise);       //raises scoop out of the way
 lturn(10);                              //turn left 45 degrees, should be perpendicular with line
 bdrive(line);                           //backs up to black line
-lturn(90);                              //turn left 90 degrees, , should be parallel with line
+lturn(90);                              //turn left 90 degrees, should be parallel with line
 //fdrive(20);
 disable_servos ();
 create_stop();
