@@ -1,33 +1,33 @@
 #include <kipr/wombat.h>
 //it takes around 15 to 20 seconds to grab the first cube
-int bump1 = 0; //left bumper
-int bump2 = 1; //right bumper
-int rspeed = 980; //speed of the left motor
-int lspeed = 1000; //speed of the left motor
-int open = 1450; //claw open position
-int close = 625; //claw closed position
-int pulleyspeed = 1000; //speed of motorport 2 to 
-int oneeightyturn = 2200;
-int ninetyturn = 1095;
+int bump1 = 0;               //left bumper
+int bump2 = 1;               //right bumper
+int rspeed = 980;            //speed of the left motor
+int lspeed = 1000;           //speed of the left motor
+int open = 1450;             //claw open position
+int close = 625;             //claw closed position
+int pulleyspeed = 1000;      //speed of motorport 2 to 
+int oneeightyturn = 2200;    //msleep value for 180 degree turn
+int ninetyturn = 1095;       //msleep value for 90 degree turn
 int main()
 {
     wait_for_light(0);
     shut_down_in(120);
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(4500); //move out of the creates way
+    msleep(4500);            //move out of the creates way
     
     mav(0,lspeed);
     mav(1,-1*rspeed);
-    msleep(ninetyturn); //turn towards leftmost tower
+    msleep(ninetyturn);      //turn towards leftmost tower
     
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(8200); //drive infront of leftmost tower
+    msleep(8200);            //drive infront of leftmost tower
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(ninetyturn); //facing leftmost tower
+    msleep(ninetyturn);      //facing leftmost tower
     
       while((digital(bump1)==0)||(digital(bump2)==0)) //drive into leftmost tower
       {
@@ -40,30 +40,30 @@ int main()
     mav(1,-1*rspeed);
     msleep(170);
     off(0);
-    off(1); //at tower, both motors off
+    off(1);                       //at tower, both motors off
     
     enable_servo(0);
     set_servo_position(0,open);
     
     mav(2,-1*pulleyspeed);
     msleep(1800); 
-    off(2); //lower claw
+    off(2);                       //lower claw
     
     set_servo_position(0,close); 
     msleep(200);
-    disable_servo(0); //pick up leftmost cube
+    disable_servo(0);             //pick up leftmost cube
     
     mav(2,pulleyspeed); 
     msleep(1800);
-    off(2); //raise claw
+    off(2);                       //raise claw
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(1200); //back up from tower
+    msleep(1200);                 //back up from tower
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(1025); //turn towards right side of board
+    msleep(1025);                 //turn towards right side of board
     
       while((digital(bump1)==0)||(digital(bump2)==0)) //bump next to rightmost tower
       {
@@ -74,35 +74,35 @@ int main()
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(2800); //back up in line with tower for when its turned
+    msleep(2800);                 //back up in line with tower for when its turned
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(ninetyturn); //turn towards cybersecurity
+    msleep(ninetyturn);           //turn towards cybersecurity
     
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(1500); //drive to cybersecurity
+    msleep(1500);                 //drive to cybersecurity
     off(0);
     off(1);
     
     mav(2,-1*pulleyspeed);
     msleep(3000);
-    off(2); //lower claw to drop cube
+    off(2);                      //lower claw to drop cube
     
     
     
     enable_servo(0);
     set_servo_position(0,open); 
-    msleep(300); //first cube in cybersecurity lab
+    msleep(300);                //first cube in cybersecurity lab
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(850); //back away so we dont hit the cube when turning
+    msleep(850);                //back away so we dont hit the cube when turning
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(oneeightyturn); //turn towards rightmost tower
+    msleep(oneeightyturn);     //turn towards rightmost tower
     off(0);
     off(1);
     
@@ -123,73 +123,73 @@ int main()
     mav(1,-1*rspeed);
     msleep(170);
     off(0);
-    off(1); //at tower, both motors off
+    off(1);                             //at tower, both motors off
     
     enable_servo(0);
     set_servo_position(0,open);
     
     mav(2,-1*pulleyspeed);
-    msleep(1800); //lower claw
+    msleep(1800);                      //lower claw
     off(2);
     
     set_servo_position(0,close); 
-    msleep(300); //second cube secured
+    msleep(300);                       //second cube secured
     disable_servo(0);
     
     mav(2,900);
-    msleep(1800); //raise claw
+    msleep(1800);                      //raise claw
     off(2);
     
     mav(0,-1*lspeed);
     mav(1,-1*rspeed);
-    msleep(3400); //back towards cybersecurity and push cube off black line
+    msleep(3400);                     //back towards cybersecurity and push cube off black line
     
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(150); //move forward to not hit the cube
+    msleep(150);                      //move forward to not hit the cube
     
     mav(0,-1*lspeed);
     mav(1,rspeed);
-    msleep(2023); //turn to cube
+    msleep(2023);                     //turn to cube
     off(0);
     off(1);
     
     enable_servo(0);
     mav(2,-1*pulleyspeed);
-    msleep(3500); //lower claw as much as possible
+    msleep(3500);                    //lower claw as much as possible
     off(2);
     
     set_servo_position(0,open);
-    msleep(300); //STACK HEIGHT 2!!!!!!
+    msleep(300);                  //STACK HEIGHT 2!!!!!!
     disable_servo(0); 
     
     mav(2,pulleyspeed);
-    msleep(3000); //raise claw
+    msleep(3000);                 //raise claw
     off(2);
     
     mav(0,lspeed);
     mav(1,-1*rspeed);
-    msleep(960); //turn to alarm
+    msleep(960);                  //turn to alarm
     off(0);
     off(1);
     
     mav(2,-1*pulleyspeed);
-    msleep(3000); //lower claw
+    msleep(3000);                 //lower claw
     off(2);
     
     enable_servo(0);
     set_servo_position(0,480);
-    msleep(100); //close claw all the way
+    msleep(100);                  //close claw all the way
     disable_servo(0);
     
     mav(0,lspeed);
     mav(1,rspeed);
-    msleep(1300); //move towards alarm
+    msleep(1300);                //move towards alarm
     off(0);
     off(1);
     
     mav(2,pulleyspeed);
-    msleep(3000); //flick alarm on
+    msleep(3000);                //flick alarm on
     off(2);
     
     return 0;
